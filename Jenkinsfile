@@ -16,14 +16,14 @@ pipeline {
 
         stage('Dockerize') {
             steps {
-                sh 'docker build -t warthex/ci_app .'
-                sh 'docker push warthex/ci_app'
+                bat 'start /B docker build -t warthex/ci_app .'
+                bat 'start /B docker push warthex/ci_app'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker-compose up -d'
+                bat 'start /B docker-compose up -d'
             }
         }
     }
