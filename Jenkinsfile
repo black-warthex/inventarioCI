@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    environment{
+        DOCKERHUB_CREDENTIALS = credentials('docker')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -17,9 +19,9 @@ pipeline {
         stage('Build image') {
             steps {
                 bat 'docker build -t warthex/ci_app:latest .'
-                withCredentials([usernamePassword(credentialsId: 'dckr_pat_VmO3MjtAjIV3umf21WV1xe0aUL8', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    bat 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-                }
+      
+                 bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                
                 bat 'docker push warthex/ci_app:latest'
             }
         }
