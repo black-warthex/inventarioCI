@@ -21,6 +21,12 @@ pipeline {
                  bat 'gradle build'
             }
         }
+        
+        stage('detener DB build') {
+            steps {
+                 bat 'docker stop ci-db'
+            }
+        }
 
         stage('Build image') {
             steps {
