@@ -9,6 +9,13 @@ pipeline {
                 git 'https://github.com/black-warthex/inventarioCI.git'
             }
         }
+        
+        stage('Iniciar DB for build') {
+            steps {
+                 bat 'docker remove ci-db'
+                 bat 'docker run --name ci-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=admin -e MYSQL_PASSWORD=root -e MYSQL_DATABASE=app_ci mysql'
+            }
+        }
 
         stage('Build') {
             steps {
