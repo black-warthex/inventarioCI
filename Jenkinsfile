@@ -19,12 +19,20 @@ pipeline {
         stage('Build image') {
             steps {
                 bat 'docker build -t warthex/ci_app:latest .'
-      
-                 bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                
+            }
+        }
+        stage('Login') {
+            steps {
+                  bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        
+        stage('push'){
+            steps{
                 bat 'docker push warthex/ci_app:latest'
             }
         }
+        
 
         stage('Deploy') {
             steps {
