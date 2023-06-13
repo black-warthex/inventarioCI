@@ -18,7 +18,7 @@ pipeline {
             steps {
                 bat 'docker build -t warthex/ci_app:latest .'
                 withCredentials([usernamePassword(credentialsId: 'dckr_pat_vDyxXX5p8cvwFSl66xGCH1a9hzs', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    bat 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin''
+                    bat 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                 }
                 bat 'docker push warthex/ci_app:latest'
             }
