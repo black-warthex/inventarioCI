@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app-ci:
-    image: warthex/ci_app:1.0
+    image: warthex/ci_app
     build: .
     ports:
       - "8080:8080"
