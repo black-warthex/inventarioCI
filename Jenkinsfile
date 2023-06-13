@@ -10,20 +10,20 @@ pipeline {
 
         stage('Build') {
             steps {
-                 bat 'start /B gradle build'
+                 bat 'gradle build'
             }
         }
 
         stage('Dockerize') {
             steps {
-                bat 'start /B docker build -t warthex/ci_app .'
-                bat 'start /B docker push warthex/ci_app'
+                bat 'docker build -t warthex/ci_app .'
+                bat 'docker push warthex/ci_app'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'start /B docker-compose up -d'
+                bat 'docker-compose up -d'
             }
         }
     }
