@@ -33,7 +33,11 @@ pipeline {
             }
         }
         
-
+        stage('Stop') {
+            steps {
+                bat 'docker-compose down'
+            }
+        }
         stage('Deploy') {
             steps {
                 bat 'docker-compose up -d'
