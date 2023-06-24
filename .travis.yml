@@ -1,8 +1,8 @@
 language: java
 jdk:
   - openjdk17
-install: ./gradlew assemble
-script: gradle build
+install: gradle assemble
+script: gradle check
 
 notifications: 
   email: yonathanw@outlook.es
