@@ -16,6 +16,5 @@ after_success:
 after_script:
   - docker-compose down
 
-
 notifications: 
   email: yonathanw@outlook.es
