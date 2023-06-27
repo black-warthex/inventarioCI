@@ -5,7 +5,8 @@ services:
   - docker
 
 before_install:
-  - git checkout master
+  - git branch -a
+  - git checkout origin/master
   - chmod +x gradlew
 
 script:
@@ -17,5 +18,5 @@ after_success:
 after_script:
   - docker-compose down
 
-notifications: 
+notifications:
   email: yonathanw@outlook.es
