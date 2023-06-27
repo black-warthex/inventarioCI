@@ -15,7 +15,6 @@ pipeline {
                 bat 'docker start ci-db'
                 bat 'gradle build'
                 bat 'docker stop ci-db'
-                bat 'docker remove ci-db'
             }
         }
 
