@@ -5,6 +5,8 @@ services:
   - docker
 
 before_install:
+  - git branch -a
+  - git fetch origin
   - git checkout origin/master
   - chmod +x gradlew
 
