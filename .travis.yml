@@ -1,9 +1,21 @@
-install: gradle wrapper --gradle-version 8.1.1
 language: java
-jdk:
-  - openjdk17
+jdk: openjdk17
 
-script: gradle check
+services:
+  - docker
+
+before_install:
+  - git checkout master
+  - chmod +x gradlew
+
+script:
+  - ./gradlew clean build
+
+after_success:
+  - docker-compose up -d --build
+
+after_script:
+  - docker-compose down
 
 notifications: 
   email: yonathanw@outlook.es

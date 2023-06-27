@@ -12,7 +12,7 @@ pipeline {
         
         stage('create build') {
             steps {
-                bat 'docker run -d --name ci-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -e MYSQL_USER=admin -e MYSQL_PASSWORD=root -e MYSQL_DATABASE=app_ci mysql'
+                bat 'docker start ci-db'
                 bat 'gradle build'
                 bat 'docker stop ci-db'
                 bat 'docker remove ci-db'
