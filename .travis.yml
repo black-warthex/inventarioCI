@@ -5,7 +5,7 @@ services:
   - docker
 
 before_install:
-  - git checkout master
+  - git checkout origin/master
   - chmod +x gradlew
 
 script:
