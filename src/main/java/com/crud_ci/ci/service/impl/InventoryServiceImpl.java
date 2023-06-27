@@ -8,6 +8,8 @@ import com.crud_ci.ci.utils.DefaultAnserEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InventoryServiceImpl implements IInventoryService {
 
@@ -17,13 +19,40 @@ public class InventoryServiceImpl implements IInventoryService {
 
     @Override
     public ResponseDto addInventory (InventoryEntity inventory){
+        repository.save(inventory);
+        response.setMessage(DefaultAnserEnum.MESSAGE_INSERT.getValue());
+        response.setSuccess(true);
+        return response;
+    }
 
-           repository.save(inventory);
+    @Override
+    public List<InventoryEntity> getAllInventory(){
+        return  repository.findAll();
+    }
 
-           response.setMessage(DefaultAnserEnum.MESSAGE_INSERT.getValue());
-           response.setSuccess(true);
-           return  response;
+    @Override
+    public List<InventoryEntity> findByItemName(String name){
+        return  repository.findByinventoryItemName(name);
+    }
 
+    @Override
+    public ResponseDto deleteInventory(String name){
+        repository.deleteById(name);
+        response.setMessage(DefaultAnserEnum.MESSAGE_DELETE.getValue());
+        response.setSuccess(true);
+        return response;
+    }
+
+    @Override
+    public ResponseDto updateInventoryPricer(String name,Double price){
+
+        List<InventoryEntity> inventoryEntity = repository.findByinventoryItemName(name);
+        InventoryEntity inventory = inventoryEntity.get(0);
+        inventory.setInventoryItemPrice(price);
+        repository.save(inventory);
+        response.setMessage(DefaultAnserEnum.MESSAGE_UPDATE.getValue());
+        response.setSuccess(true);
+        return response;
     }
 
 }
