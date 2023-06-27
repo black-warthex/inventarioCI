@@ -6,7 +6,7 @@ services:
 
 before_install:
   - git branch -a
-  - git checkout main
+  - git checkout master
   - chmod +x gradlew
 
 script:
